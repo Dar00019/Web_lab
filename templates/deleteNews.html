@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление</title>
+    <style>
+        /* Общий контейнер для формы */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Обертка формы для центровки и ограничения ширины */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Группы формы для вертикального расположения элементов */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px; /* небольшой интервал между группами */
+        }
+
+        /* Метки */
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Стиль для кнопок */
+        button {
+            padding: 12px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #cc4125;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .cancel-button {
+            background-color: #888;
+        }
+
+        /* hover-эффекты для кнопок */
+        button:hover {
+            background-color: #a61c00;
+            transform: translateY(-2px);
+        }
+        .cancel-button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+<form action="{{ url_for('deleteNews', news_id=news.id) }}" method='post'>
+  <h2>Вы уверены, что хотите удалить новость "{{news.header}}"?</h2>
+  <div class="form-group" style="display:flex; flex-wrap: wrap; gap: 10px;">
+      <button type="submit">Удалить</button>
+      <a href="{{ url_for('index') }}"><button type="button" class="cancel-button">Отменить</button></a>
+  </div>
+</form>
+</body>
+</html>

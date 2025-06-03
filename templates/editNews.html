@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+    <style>
+        /* Общий контейнер для формы */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Обертка формы для центровки и ограничения ширины */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Группы формы для вертикального расположения элементов */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px; /* небольшой интервал между группами */
+        }
+
+        /* Метки */
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Поля ввода для заголовка и текста */
+        input[type="text"] {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.2s;
+        }
+
+        textarea[name="text"] {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Стиль для кнопок */
+        button {
+            padding: 12px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .cancel-button {
+            background-color: #888;
+        }
+
+        /* hover-эффекты для кнопок */
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .cancel-button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+<form action="{{ url_for('editNews', news_id=news.id)}}" method="post">
+  <div class="form-group">
+    <label for="header">Заголовок:</label>
+    <input type="text" maxlength="100" class="form-control" name="header" value="{{ news.header }}" />
+  </div>
+  <div class="form-group">
+    <label for="text">Текст:</label>
+    <textarea class="form-control" name="text">{{ news.text }}</textarea>
+  </div>
+  <div class="form-group" style="display:flex; flex-wrap: wrap; gap: 10px;">
+    <button type="submit">Обновить</button>
+    <a href="{{ url_for('index') }}"><button type="button" class="cancel-button">Отменить</button></a>
+  </div>
+</form>
+</body>
+</html>

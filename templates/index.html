@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="news-header">Новости</h1>
+{% if current_user.is_authenticated %}
+  <a href="{{ url_for('addNews') }}">
+     <button class="add-news-button">Добавить новость</button>
+  </a>
+{% endif %}
+<ol>
+  {% for message in news %}
+  <br><br>
+    <li>
+      <h5>{{ message.header }}</h5>
+      <p>{{ message.text }}</p>
+      {% if message.author %}
+        <p>Автор: {{ message.author.name }}</p>
+      {% else %}
+        <p>Автор: Неизвестен</p>
+      {% endif %}
+    </li>
+    {# Проверка, что текущий пользователь — автор новости #}
+    {% if current_user.is_authenticated %}
+      {% if message.author == current_user.user %}
+        <a href="{{ url_for('editNews', news_id=message.id) }}">Изменить</a>
+        <a href="{{ url_for('deleteNews', news_id=message.id) }}" style="margin-left: 10px;">Удалить</a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ol>
+{% endblock %}
