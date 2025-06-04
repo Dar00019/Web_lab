@@ -12,6 +12,8 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 
+app.template_folder = 'templates'
+
 api = Api(app)
 
 app.json.ensure_ascii = False
